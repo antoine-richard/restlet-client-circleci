@@ -4,3 +4,6 @@ machine:
 test:
   override:
     - mvn test -Dlicense_key=$LICENSE_KEY -B
+  post:
+    - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+    - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
